@@ -8,6 +8,7 @@ using Confuser.DynCipher;
 using Confuser.Renamer;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
+using dnlib.DotNet.MD;
 
 namespace Confuser.Protections.Constants {
 	internal class InjectPhase : ProtectionPhase {
@@ -46,6 +47,9 @@ namespace Confuser.Protections.Constants {
 						break;
 					case Mode.x86:
 						moduleCtx.ModeHandler = new x86Mode();
+                        
+                                                if ((context.CurrentModule.Cor20HeaderFlags & ComImageFlags.ILOnly) != 0)
+                                                	context.CurrentModuleWriterOptions.Cor20HeaderOptions.Flags &= ~ComImageFlags.ILOnly;
 						break;
 					default:
 						throw new UnreachableException();
