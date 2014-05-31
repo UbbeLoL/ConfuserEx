@@ -68,12 +68,6 @@ namespace Confuser.Protections.ReferenceProxy {
 					throw new UnreachableException();
 			}
 
-		        if (ret.Encoding == EncodingType.x86)
-		    	{
-		        	if ((context.CurrentModule.Cor20HeaderFlags & dnlib.DotNet.MD.ComImageFlags.ILOnly) != 0)
-                    			context.CurrentModuleWriterOptions.Cor20HeaderOptions.Flags &= ~dnlib.DotNet.MD.ComImageFlags.ILOnly;
-		    	}
-
 			return ret;
 		}
 
